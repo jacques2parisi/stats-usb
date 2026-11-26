@@ -1,0 +1,495 @@
+{
+ "updatedAt": "2026-11-26T20:29:17.614637Z",
+ "lastPlayed": 7,
+ "source": "https://competitions.ffbb.com/ligues/naq/competitions/pnm?phase=200000002897158&poule=200000003054328",
+ "equipe": "UNION SAINT BRUNO BORDEAUX",
+ "titre": "Prénationale M · Poule A",
+ "sous_titre": "Ligue Nouvelle-Aquitaine",
+ "matches": [
+  {
+   "j": 1,
+   "d": "samedi 19 septembre 2026",
+   "h": "CEP POITIERS",
+   "a": "AGEN BASKET CLUB",
+   "sh": 67,
+   "sa": 81
+  },
+  {
+   "j": 1,
+   "d": "samedi 19 septembre 2026",
+   "h": "COGNAC BASKET AVENIR",
+   "a": "LES LILAS SERIGNACAIS",
+   "sh": 87,
+   "sa": 66
+  },
+  {
+   "j": 1,
+   "d": "samedi 19 septembre 2026",
+   "h": "UNION SAINT BRUNO BORDEAUX",
+   "a": "PAYS MELUSIN BASKET CLUB",
+   "sh": 101,
+   "sa": 68
+  },
+  {
+   "j": 1,
+   "d": "samedi 19 septembre 2026",
+   "h": "AYTRE BASKET BALL",
+   "a": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "sh": 77,
+   "sa": 86
+  },
+  {
+   "j": 1,
+   "d": "samedi 19 septembre 2026",
+   "h": "US CHARTRONS BORDEAUX",
+   "a": "BORDEAUX ETUDIANTS CLUB",
+   "sh": 71,
+   "sa": 56
+  },
+  {
+   "j": 1,
+   "d": "samedi 19 septembre 2026",
+   "h": "AS TRESSES",
+   "a": "ENTENTE PESSAC BASKET CLUB",
+   "sh": 80,
+   "sa": 60
+  },
+  {
+   "j": 2,
+   "d": "samedi 26 septembre 2026",
+   "h": "CEP POITIERS",
+   "a": "LES LILAS SERIGNACAIS",
+   "sh": 85,
+   "sa": 83
+  },
+  {
+   "j": 2,
+   "d": "samedi 26 septembre 2026",
+   "h": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "a": "UNION SAINT BRUNO BORDEAUX",
+   "sh": 73,
+   "sa": 77
+  },
+  {
+   "j": 2,
+   "d": "samedi 26 septembre 2026",
+   "h": "AGEN BASKET CLUB",
+   "a": "AS TRESSES",
+   "sh": 72,
+   "sa": 82
+  },
+  {
+   "j": 2,
+   "d": "samedi 26 septembre 2026",
+   "h": "ENTENTE PESSAC BASKET CLUB",
+   "a": "US CHARTRONS BORDEAUX",
+   "sh": 58,
+   "sa": 70
+  },
+  {
+   "j": 2,
+   "d": "samedi 26 septembre 2026",
+   "h": "BORDEAUX ETUDIANTS CLUB",
+   "a": "AYTRE BASKET BALL",
+   "sh": 81,
+   "sa": 73
+  },
+  {
+   "j": 2,
+   "d": "samedi 26 septembre 2026",
+   "h": "PAYS MELUSIN BASKET CLUB",
+   "a": "COGNAC BASKET AVENIR",
+   "sh": 51,
+   "sa": 83
+  },
+  {
+   "j": 3,
+   "d": "samedi 3 octobre 2026",
+   "h": "PAYS MELUSIN BASKET CLUB",
+   "a": "CEP POITIERS",
+   "sh": 53,
+   "sa": 65
+  },
+  {
+   "j": 3,
+   "d": "samedi 3 octobre 2026",
+   "h": "COGNAC BASKET AVENIR",
+   "a": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "sh": 82,
+   "sa": 87
+  },
+  {
+   "j": 3,
+   "d": "samedi 3 octobre 2026",
+   "h": "UNION SAINT BRUNO BORDEAUX",
+   "a": "BORDEAUX ETUDIANTS CLUB",
+   "sh": 67,
+   "sa": 66
+  },
+  {
+   "j": 3,
+   "d": "samedi 3 octobre 2026",
+   "h": "US CHARTRONS BORDEAUX",
+   "a": "AGEN BASKET CLUB",
+   "sh": 64,
+   "sa": 75
+  },
+  {
+   "j": 3,
+   "d": "samedi 3 octobre 2026",
+   "h": "AS TRESSES",
+   "a": "LES LILAS SERIGNACAIS",
+   "sh": 67,
+   "sa": 69
+  },
+  {
+   "j": 3,
+   "d": "samedi 3 octobre 2026",
+   "h": "AYTRE BASKET BALL",
+   "a": "ENTENTE PESSAC BASKET CLUB",
+   "sh": 87,
+   "sa": 99
+  },
+  {
+   "j": 4,
+   "d": "samedi 10 octobre 2026",
+   "h": "BORDEAUX ETUDIANTS CLUB",
+   "a": "COGNAC BASKET AVENIR",
+   "sh": 78,
+   "sa": 83
+  },
+  {
+   "j": 4,
+   "d": "samedi 10 octobre 2026",
+   "h": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "a": "CEP POITIERS",
+   "sh": 90,
+   "sa": 80
+  },
+  {
+   "j": 4,
+   "d": "samedi 10 octobre 2026",
+   "h": "ENTENTE PESSAC BASKET CLUB",
+   "a": "UNION SAINT BRUNO BORDEAUX",
+   "sh": 58,
+   "sa": 57
+  },
+  {
+   "j": 4,
+   "d": "samedi 10 octobre 2026",
+   "h": "AGEN BASKET CLUB",
+   "a": "AYTRE BASKET BALL",
+   "sh": 92,
+   "sa": 60
+  },
+  {
+   "j": 4,
+   "d": "samedi 10 octobre 2026",
+   "h": "LES LILAS SERIGNACAIS",
+   "a": "US CHARTRONS BORDEAUX",
+   "sh": 68,
+   "sa": 81
+  },
+  {
+   "j": 4,
+   "d": "samedi 10 octobre 2026",
+   "h": "PAYS MELUSIN BASKET CLUB",
+   "a": "AS TRESSES",
+   "sh": 58,
+   "sa": 90
+  },
+  {
+   "j": 5,
+   "d": "samedi 17 octobre 2026",
+   "h": "CEP POITIERS",
+   "a": "BORDEAUX ETUDIANTS CLUB",
+   "sh": 101,
+   "sa": 67
+  },
+  {
+   "j": 5,
+   "d": "samedi 17 octobre 2026",
+   "h": "COGNAC BASKET AVENIR",
+   "a": "ENTENTE PESSAC BASKET CLUB",
+   "sh": 81,
+   "sa": 68
+  },
+  {
+   "j": 5,
+   "d": "samedi 17 octobre 2026",
+   "h": "UNION SAINT BRUNO BORDEAUX",
+   "a": "AGEN BASKET CLUB",
+   "sh": 78,
+   "sa": 95
+  },
+  {
+   "j": 5,
+   "d": "samedi 17 octobre 2026",
+   "h": "AS TRESSES",
+   "a": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "sh": 78,
+   "sa": 75
+  },
+  {
+   "j": 5,
+   "d": "samedi 17 octobre 2026",
+   "h": "AYTRE BASKET BALL",
+   "a": "LES LILAS SERIGNACAIS",
+   "sh": 94,
+   "sa": 77
+  },
+  {
+   "j": 5,
+   "d": "samedi 17 octobre 2026",
+   "h": "US CHARTRONS BORDEAUX",
+   "a": "PAYS MELUSIN BASKET CLUB",
+   "sh": 75,
+   "sa": 45
+  },
+  {
+   "j": 6,
+   "d": "samedi 7 novembre 2026",
+   "h": "BORDEAUX ETUDIANTS CLUB",
+   "a": "AS TRESSES",
+   "sh": 70,
+   "sa": 72
+  },
+  {
+   "j": 6,
+   "d": "samedi 7 novembre 2026",
+   "h": "ENTENTE PESSAC BASKET CLUB",
+   "a": "CEP POITIERS",
+   "sh": 64,
+   "sa": 75
+  },
+  {
+   "j": 6,
+   "d": "samedi 7 novembre 2026",
+   "h": "AGEN BASKET CLUB",
+   "a": "COGNAC BASKET AVENIR",
+   "sh": 95,
+   "sa": 61
+  },
+  {
+   "j": 6,
+   "d": "samedi 7 novembre 2026",
+   "h": "LES LILAS SERIGNACAIS",
+   "a": "UNION SAINT BRUNO BORDEAUX",
+   "sh": 62,
+   "sa": 67
+  },
+  {
+   "j": 6,
+   "d": "samedi 7 novembre 2026",
+   "h": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "a": "US CHARTRONS BORDEAUX",
+   "sh": 83,
+   "sa": 93
+  },
+  {
+   "j": 6,
+   "d": "samedi 7 novembre 2026",
+   "h": "PAYS MELUSIN BASKET CLUB",
+   "a": "AYTRE BASKET BALL",
+   "sh": 67,
+   "sa": 82
+  },
+  {
+   "j": 7,
+   "d": "samedi 14 novembre 2026",
+   "h": "PAYS MELUSIN BASKET CLUB",
+   "a": "LES LILAS SERIGNACAIS",
+   "sh": 58,
+   "sa": 81
+  },
+  {
+   "j": 7,
+   "d": "samedi 14 novembre 2026",
+   "h": "US CHARTRONS BORDEAUX",
+   "a": "AS TRESSES",
+   "sh": 73,
+   "sa": 66
+  },
+  {
+   "j": 7,
+   "d": "samedi 14 novembre 2026",
+   "h": "UNION SAINT BRUNO BORDEAUX",
+   "a": "COGNAC BASKET AVENIR",
+   "sh": 79,
+   "sa": 85
+  },
+  {
+   "j": 7,
+   "d": "samedi 14 novembre 2026",
+   "h": "BORDEAUX ETUDIANTS CLUB",
+   "a": "ENTENTE PESSAC BASKET CLUB",
+   "sh": 71,
+   "sa": 68
+  },
+  {
+   "j": 7,
+   "d": "samedi 14 novembre 2026",
+   "h": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "a": "AGEN BASKET CLUB",
+   "sh": 72,
+   "sa": 79
+  },
+  {
+   "j": 7,
+   "d": "samedi 14 novembre 2026",
+   "h": "AYTRE BASKET BALL",
+   "a": "CEP POITIERS",
+   "sh": 61,
+   "sa": 69
+  }
+ ],
+ "standings": [
+  {
+   "t": "AGEN BASKET CLUB",
+   "pts": 13,
+   "j": 7,
+   "g": 6,
+   "p": 1,
+   "m": 589,
+   "e": 484
+  },
+  {
+   "t": "US CHARTRONS BORDEAUX",
+   "pts": 13,
+   "j": 7,
+   "g": 6,
+   "p": 1,
+   "m": 527,
+   "e": 451
+  },
+  {
+   "t": "AS TRESSES",
+   "pts": 12,
+   "j": 7,
+   "g": 5,
+   "p": 2,
+   "m": 535,
+   "e": 477
+  },
+  {
+   "t": "CEP POITIERS",
+   "pts": 12,
+   "j": 7,
+   "g": 5,
+   "p": 2,
+   "m": 542,
+   "e": 499
+  },
+  {
+   "t": "COGNAC BASKET AVENIR",
+   "pts": 12,
+   "j": 7,
+   "g": 5,
+   "p": 2,
+   "m": 562,
+   "e": 524
+  },
+  {
+   "t": "UNION SAINT BRUNO BORDEAUX",
+   "pts": 11,
+   "j": 7,
+   "g": 4,
+   "p": 3,
+   "m": 526,
+   "e": 507
+  },
+  {
+   "t": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "pts": 10,
+   "j": 7,
+   "g": 3,
+   "p": 4,
+   "m": 566,
+   "e": 566
+  },
+  {
+   "t": "LES LILAS SERIGNACAIS",
+   "pts": 9,
+   "j": 7,
+   "g": 2,
+   "p": 5,
+   "m": 506,
+   "e": 539
+  },
+  {
+   "t": "AYTRE BASKET BALL",
+   "pts": 9,
+   "j": 7,
+   "g": 2,
+   "p": 5,
+   "m": 534,
+   "e": 571
+  },
+  {
+   "t": "BORDEAUX ETUDIANTS CLUB",
+   "pts": 9,
+   "j": 7,
+   "g": 2,
+   "p": 5,
+   "m": 489,
+   "e": 535
+  },
+  {
+   "t": "ENTENTE PESSAC BASKET CLUB",
+   "pts": 9,
+   "j": 7,
+   "g": 2,
+   "p": 5,
+   "m": 475,
+   "e": 521
+  },
+  {
+   "t": "PAYS MELUSIN BASKET CLUB",
+   "pts": 7,
+   "j": 7,
+   "g": 0,
+   "p": 7,
+   "m": 400,
+   "e": 577
+  }
+ ],
+ "next": [
+  {
+   "j": 8,
+   "date": "samedi 28 novembre 2026, 20 h",
+   "h": "CEP POITIERS",
+   "a": "UNION SAINT BRUNO BORDEAUX"
+  },
+  {
+   "j": 8,
+   "date": "samedi 28 novembre 2026, 20 h",
+   "h": "COGNAC BASKET AVENIR",
+   "a": "US CHARTRONS BORDEAUX"
+  },
+  {
+   "j": 8,
+   "date": "samedi 28 novembre 2026, 20 h",
+   "h": "IE - CTC AVENIR BASKET D'ALBRET - VAL D'ALBRET BASKET",
+   "a": "ENTENTE PESSAC BASKET CLUB"
+  },
+  {
+   "j": 8,
+   "date": "samedi 28 novembre 2026, 20 h",
+   "h": "AGEN BASKET CLUB",
+   "a": "PAYS MELUSIN BASKET CLUB"
+  },
+  {
+   "j": 8,
+   "date": "samedi 28 novembre 2026, 20 h",
+   "h": "LES LILAS SERIGNACAIS",
+   "a": "BORDEAUX ETUDIANTS CLUB"
+  },
+  {
+   "j": 8,
+   "date": "samedi 28 novembre 2026, 20 h 15",
+   "h": "AS TRESSES",
+   "a": "AYTRE BASKET BALL"
+  }
+ ],
+ "anomalies": []
+}

@@ -1,0 +1,63 @@
+name: Mise à jour des stats
+
+on:
+  schedule:
+    - cron: "57 7 * * 0"   # chaque dimanche, 8 h 57 à Paris en hiver (9 h 57 en été)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mise-a-jour
+  cancel-in-progress: false
+
+jobs:
+  maj:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AVEC_CLAUDE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Relever les données FFBB
+        run: |
+          pip install --quiet ffbb-data-client
+          python scripts/releve.py
+
+      - name: Observations entraîneur (Claude)
+        if: env.AVEC_CLAUDE == 'true'
+        continue-on-error: true
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          npm install -g @anthropic-ai/claude-code --silent
+          for slug in $(python -c "import json;print(' '.join(e['slug'] for e in json.load(open('equipes.json'))))"); do
+            [ -f "travail/$slug-contexte.json" ] || continue
+            sed "s/SLUG/$slug/g" scripts/consigne-observations.md > "travail/$slug-consigne.md"
+            claude -p "$(cat travail/$slug-consigne.md)" --allowedTools "Read,Write" --max-turns 8 > "travail/$slug-claude.log" 2>&1 || echo "Claude a échoué pour $slug"
+            tail -n 5 "travail/$slug-claude.log"
+            python -c "import json;d=json.load(open('travail/$slug-obs.json'));print('$slug :',len(d['items']),'observations')" || echo "$slug : pas d'observations valides"
+          done
+
+      - name: Chiffrer les observations
+        env:
+          COACH_CODE: ${{ secrets.COACH_CODE }}
+        run: node scripts/chiffrer.mjs
+
+      - name: Publier
+        run: |
+          git config user.name "stats-bot"
+          git config user.email "stats-bot@users.noreply.github.com"
+          git add docs/data
+          if git diff --cached --quiet; then
+            echo "Aucun changement."
+          else
+            git commit -m "Mise à jour des stats ($(date -u +%Y-%m-%d))"
+            git push
+          fi

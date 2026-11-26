@@ -7,40 +7,45 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Test 1 - API des matchs (poule A PNM)
-        run: |
-          curl -sS -o matchs.json -w "Code HTTP : %{http_code}\n" \
-            -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36" \
-            "https://competitions.ffbb.com/api/matchs?poule=200000003054328&played=true" || true
-          echo "Taille : $(wc -c < matchs.json) octets"
-          echo "Début de la réponse :"
-          head -c 1500 matchs.json; echo
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: Test 2 - Page de la journée 7
-        run: |
-          curl -sS -o j7.html -w "Code HTTP : %{http_code}\n" \
-            -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36" \
-            "https://competitions.ffbb.com/ligues/naq/competitions/pnm?phase=200000002897158&poule=200000003054328&journee=7" || true
-          echo "Taille : $(wc -c < j7.html) octets"
-          echo "Le nom UNION SAINT BRUNO apparaît $(grep -o 'UNION SAINT BRUNO' j7.html | wc -l) fois"
+      - name: Installer la bibliothèque FFBB
+        run: pip install --quiet ffbb-data-client
 
-      - name: Test 3 - Page du classement
+      - name: Lire la poule A (classement + matchs)
         run: |
-          curl -sS -o classement.html -w "Code HTTP : %{http_code}\n" \
-            -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36" \
-            "https://competitions.ffbb.com/ligues/naq/competitions/pnm/classement?phase=200000002897158&poule=200000003054328" || true
-          echo "Taille : $(wc -c < classement.html) octets"
-          echo "Le nom AGEN BASKET CLUB apparaît $(grep -o 'AGEN BASKET CLUB' classement.html | wc -l) fois"
-
-      - name: Test 4 - Bibliothèque Python de l'API publique FFBB
-        continue-on-error: true
-        run: |
-          pip install --quiet ffbb_api_client_v3
           python - <<'EOF'
-          from ffbb_api_client_v3 import TokenManager
-          try:
-              t = TokenManager.get_tokens()
-              print("Jetons publics FFBB récupérés :", "OUI" if t else "NON")
-          except Exception as e:
-              print("Échec :", type(e).__name__, e)
+          import json
+          from ffbb_data_client import FFBBDataClient
+
+          def plat(o):
+              if hasattr(o, "model_dump"):
+                  return o.model_dump(mode="json")
+              if hasattr(o, "__dict__"):
+                  return {k: v for k, v in vars(o).items() if not k.startswith("_")}
+              return o
+
+          client = FFBBDataClient.create()
+          poule = client.get_poule(200000003054328)
+          d = plat(poule)
+          print("Nom :", getattr(poule, "nom", "?"))
+          print("Champs de la poule :", list(d.keys()) if isinstance(d, dict) else type(d))
+
+          cl = getattr(poule, "classement", None) or []
+          print("\n=== CLASSEMENT :", len(cl), "lignes ===")
+          for r in cl:
+              print(json.dumps(plat(r), ensure_ascii=False, default=str)[:600])
+
+          for nom in ("rencontres", "matchs", "matches", "games"):
+              rs = getattr(poule, nom, None)
+              if rs:
+                  print(f"\n=== {nom.upper()} :", len(rs), "===")
+                  for r in rs[:3]:
+                      print(json.dumps(plat(r), ensure_ascii=False, default=str)[:1500])
+                  break
+          else:
+              print("\nAucun attribut de matchs trouvé parmi : rencontres, matchs, matches, games")
           EOF

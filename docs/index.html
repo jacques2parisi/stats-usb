@@ -47,6 +47,8 @@ h2{font-size:28px;line-height:1.1;margin:0 0 14px;font-weight:800}
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .tab{font:600 16px Barlow,sans-serif;min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 .tab[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.th{all:unset;cursor:pointer;min-height:32px;padding:4px 0;white-space:nowrap}.th:hover{color:var(--ink)}.th:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+th[aria-sort=ascending] .th,th[aria-sort=descending] .th{color:var(--ball);font-weight:700}
 table{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
 th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
 th{font-weight:600;color:var(--mute);font-size:13px}
@@ -156,22 +158,41 @@ function usb(){
   <div class="next">${nx?`<strong>Prochain match · J${esc(nx.j)}</strong><br>${esc(nx.date)} · ${esc(nm(nx.h))} – ${esc(nm(nx.a))}`:"Prochain match non connu."}</div>`;
 }
 
+let sortK=null,sortD=-1;
+// Colonnes : [titre, valeur de tri, sens par défaut (-1 = plus grand d'abord, 1 = plus petit d'abord)]
+const COLS={
+  all:[["#",r=>r.rk,1],["Équipe",r=>nm(r.t),1],["Pts",r=>r.p,-1],["V-D",r=>r.w/r.n+(r.pm-r.pe)/r.n/1e4,-1],["Marqués/m",r=>r.pm/r.n,-1],["Encaissés/m",r=>r.pe/r.n,1],["Diff.",r=>r.pm-r.pe,-1]],
+  loc:[["#",r=>r.rk,1],["Équipe",r=>nm(r.t),1],["Matchs",r=>r.n,-1],["V-D",r=>r.w/r.n+(r.pm-r.pe)/r.n/1e4,-1],["Marqués/m",r=>r.pm/r.n,-1],["Encaissés/m",r=>r.pe/r.n,1],["Écart/m",r=>(r.pm-r.pe)/r.n,-1]]
+};
 function table(){
-  const ks=Object.keys(S);let rows,head;
+  const ks=Object.keys(S),tbl=document.getElementById("tbl");
+  const cols=view==="all"?COLS.all:COLS.loc;
+  let rows;
   if(view==="all"){
-    rows=D.standings.map((r,i)=>({t:r.t,rk:i+1,p:r.pts,...S[r.t]?.all}));
-    head=["#","Équipe","Pts","V-D","Marqués/m","Encaissés/m","Diff."];
-    document.getElementById("tbl").innerHTML=`<thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr class="${r.t===US?"us":""}"><td>${r.rk}</td><td>${esc(nm(r.t))}</td><td>${esc(r.p)}</td><td>${r.w}-${r.l}</td><td>${f1(r.pm/r.n)}</td><td>${f1(r.pe/r.n)}</td><td>${sg(r.pm-r.pe)}</td></tr>`).join("")}</tbody>`;
+    rows=D.standings.filter(r=>S[r.t]).map((r,i)=>({t:r.t,rk:i+1,p:r.pts,...S[r.t].all}));
+  }else{
+    // Classement par défaut : bilan (% de victoires), puis écart moyen
+    rows=ks.filter(t=>S[t][view].n).map(t=>({t,...S[t][view]}))
+      .sort((a,b)=>(b.w/b.n-a.w/a.n)||((b.pm-b.pe)/b.n-(a.pm-a.pe)/a.n)).map((r,i)=>({...r,rk:i+1}));
+  }
+  if(sortK!==null){const f=cols[sortK][1];rows=[...rows].sort((a,b)=>{const x=f(a),y=f(b);return (x<y?-1:x>y?1:0)*sortD||a.rk-b.rk})}
+  const fl=(i,dflt)=>sortK===i?(sortD<0?" ▼":" ▲"):(sortK===null&&dflt?" ▲":"");
+  tbl.innerHTML=`<thead><tr>${cols.map((c,i)=>`<th aria-sort="${sortK===i?(sortD<0?"descending":"ascending"):"none"}"><button type="button" class="th" data-i="${i}">${c[0]}${fl(i,i===0)}</button></th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr class="${r.t===US?"us":""}"><td>${r.rk}</td><td>${esc(nm(r.t))}</td><td>${view==="all"?esc(r.p):r.n}</td><td>${r.w}-${r.l}</td><td>${f1(r.pm/r.n)}</td><td>${f1(r.pe/r.n)}</td><td>${view==="all"?sg(r.pm-r.pe):sg1((r.pm-r.pe)/r.n)}</td></tr>`).join("")}</tbody>`;
+  const astuce=" Touche un titre de colonne pour trier (une deuxième fois pour inverser).";
+  if(view==="all"){
     const att=ks.reduce((a,t)=>S[t].all.pm/S[t].all.n>S[a].all.pm/S[a].all.n?t:a);
     const def=ks.reduce((a,t)=>S[t].all.pe/S[t].all.n<S[a].all.pe/S[a].all.n?t:a);
-    document.getElementById("legend").textContent=`Meilleure attaque : ${nm(att)} (${f1(S[att].all.pm/S[att].all.n)} pts/match). Meilleure défense : ${nm(def)} (${f1(S[def].all.pe/S[def].all.n)} encaissés/match).`;
+    document.getElementById("legend").textContent=`# = classement officiel. Meilleure attaque : ${nm(att)} (${f1(S[att].all.pm/S[att].all.n)} pts/match). Meilleure défense : ${nm(def)} (${f1(S[def].all.pe/S[def].all.n)} encaissés/match).`+astuce;
   }else{
-    rows=ks.filter(t=>S[t][view].n).map(t=>({t,...S[t][view]})).sort((a,b)=>b.pm/b.n-a.pm/a.n);
-    head=["#","Équipe","Matchs","V-D","Marqués/m","Encaissés/m","Écart/m"];
-    document.getElementById("tbl").innerHTML=`<thead><tr>${head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map((r,i)=>`<tr class="${r.t===US?"us":""}"><td>${i+1}</td><td>${esc(nm(r.t))}</td><td>${r.n}</td><td>${r.w}-${r.l}</td><td>${f1(r.pm/r.n)}</td><td>${f1(r.pe/r.n)}</td><td>${sg1((r.pm-r.pe)/r.n)}</td></tr>`).join("")}</tbody>`;
-    document.getElementById("legend").textContent=`Matchs ${view==="dom"?"à domicile":"à l'extérieur"} uniquement, triés par points marqués par match.`;
+    document.getElementById("legend").textContent=`Matchs ${view==="dom"?"à domicile":"à l'extérieur"} uniquement. # = rang selon le bilan (% de victoires, puis écart moyen par match).`+astuce;
   }
 }
+document.getElementById("tbl").addEventListener("click",e=>{
+  const b=e.target.closest("button.th");if(!b||!D)return;
+  const i=+b.dataset.i,cols=view==="all"?COLS.all:COLS.loc;
+  if(sortK===i)sortD=-sortD;else{sortK=i;sortD=cols[i][2]}
+  table();
+});
 
 function tops(){
   const ks=Object.keys(S);
@@ -202,7 +223,7 @@ function render(){
   bars();usb();table();tops();days();check();
 }
 
-for(const b of document.querySelectorAll(".tab"))b.addEventListener("click",()=>{view=b.dataset.v;for(const x of document.querySelectorAll(".tab"))x.setAttribute("aria-selected",x===b);if(D)table()});
+for(const b of document.querySelectorAll(".tab"))b.addEventListener("click",()=>{view=b.dataset.v;sortK=null;for(const x of document.querySelectorAll(".tab"))x.setAttribute("aria-selected",x===b);if(D)table()});
 
 // --- Espace entraîneur : déchiffrement local (PBKDF2 + AES-GCM)
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
